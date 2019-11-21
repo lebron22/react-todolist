@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import Heading from "./components/Heading";
+import TasksContextProvider from "./contexts/tasksContext";
+import AppMain from "./components/AppMain";
+import Header from "./components/Header";
+import TaskList from "./components/TaskList";
+import SwitchPanel from "./components/SwitchPanel";
+import ElsePanel from "./components/ElsePanel";
+import { colors } from "./utils/colors";
+const { lightGray } = colors;
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Heading />
+      <TasksContextProvider>
+        <AppMain>
+          <Header />
+          <TaskList />
+          <SwitchPanel />
+          <ElsePanel />
+        </AppMain>
+      </TasksContextProvider>
+    </>
   );
+};
+
+const GlobalStyle = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  font-family: Roboto, Helvetica, sans-serif;
+  width: 100%;
+  background-color: ${lightGray};
+}
+`;
 
 export default App;
